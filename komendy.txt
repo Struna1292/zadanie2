@@ -1,0 +1,12 @@
+a. docker build -t zadanie_pogoda .
+b. docker run -d -p 5000:5000 --name zadanie_pogoda -e API_KEY=5ecc10da7b38ff342329686c014ef174 zadanie_pogoda  
+c. docker logs zadanie_pogoda
+d. docker images  //sprawdza rozmiar
+    docker history zadanie_pogoda  //sprawdza warstwy
+
+// dodatkowe
+trivy image zadanie_pogoda // analiza CVE
+docker buildx create --name=lastbuilder --driver docker-container --use --bootstrap // utworzenie buildera z docker-container
+docker buildx ls // sprawdzenie builderow
+docker buildx build -f Dockerfile --platform linux/amd64,linux/arm64 --sbom --provenance=mod=max -t docker.io/kacperkowalczyk123/laboratorium:last --cache-to type=inline --cache-from type=registry,ref=docker.io/kacperkowalczyk123/laboratorium:last --push .
+docker run -d -p 5000:5000 --platform linux/arm64 --name zadanie_pogoda -e API_KEY=5ecc10da7b38ff342329686c014ef174 docker.io/kacperkowalczyk123/laboratorium:last

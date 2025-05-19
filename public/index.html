@@ -1,0 +1,23 @@
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Pogoda</title>
+</head>
+<body>
+    <h1>Sprawdź aktualną pogodę</h1>
+
+    <form action="/sprawdz" method="POST">
+        <label for="location">Wybierz lokalizację:</label>
+        <select id="location" name="location" required>
+            <option value="Polska-Warszawa">Polska - Warszawa</option>
+            <option value="Polska-Lublin">Polska - Lublin</option>
+            <option value="USA-New York">USA - New York</option>
+            <option value="Niemcy-Berlin">Niemcy - Berlin</option>
+            <option value="Rosja-Moskwa">Rosja - Moskwa</option>
+            <option value="Australia-Sydney">Australia - Sydney</option>
+        </select>
+
+        <button type="submit">Sprawdź</button>
+    </form>
+</body>
+</html>
