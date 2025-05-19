@@ -60,7 +60,7 @@ jobs:
           outputs: type=docker,dest=/tmp/image.tar
 
       - name: Scan image
-        uses: aquasecurity/trivy-action@v0.16.2
+        uses: aquasecurity/trivy-action@0.19.0
         with:
           input: /tmp/image.tar
           format: table
