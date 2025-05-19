@@ -61,10 +61,8 @@ jobs:
         uses: aquasecurity/trivy-action@0.19.0
         with:
           image-ref: ${{ steps.meta.outputs.tags }}
-          format: table
           exit-code: 1
           severity: CRITICAL,HIGH
-          ignore-unfixed: true
 
       - 
         name: Build second Docker image
@@ -85,10 +83,8 @@ jobs:
         uses: aquasecurity/trivy-action@0.19.0
         with:
           image-ref: ${{ steps.meta.outputs.tags }}
-          format: table
           exit-code: 1
           severity: CRITICAL,HIGH
-          ignore-unfixed: true
 
 
       - name: Build and push Docker image
