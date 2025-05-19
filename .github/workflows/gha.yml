@@ -48,27 +48,26 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - 
-        name: Build Docker image (for security scan)
+        name: Build Docker image (local for scan)
         uses: docker/build-push-action@v5
         id: build
         with:
           context: .
           file: ./Dockerfile
-          platforms: linux/amd64,linux/arm64
+          platforms: linux/amd64  # Trivy scan supports single platform for local image
           push: false
-          load: false
+          load: true  # Load into local Docker daemon
           cache-from: |
             type=registry,ref=${{ vars.DOCKERHUB_USERNAME }}/example:cache
           cache-to: |
             type=registry,ref=${{ vars.DOCKERHUB_USERNAME }}/example:cache,mode=max
           tags: ${{ steps.meta.outputs.tags }}
-          outputs: type=oci,dest=/tmp/image.tar
 
       - 
         name: Scan image
         uses: aquasecurity/trivy-action@0.19.0
         with:
-          input: /tmp/image.tar
+          image-ref: ${{ steps.meta.outputs.tags }}
           format: table
           exit-code: 1
           severity: CRITICAL,HIGH
